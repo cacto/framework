@@ -1,7 +1,6 @@
 package me.cacto.framework.controller.core;
 
 import java.io.IOException;
-import java.util.Arrays;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -97,15 +96,6 @@ public class ControllerDefaultFilter implements Filter {
 
 		request.setAttribute(Constants.CONTROLLER_ATTRIBUTE, controller);
 		request.getRequestDispatcher(Constants.DEFAULT_SERVLET).forward(requestWrapper, responseWrapper);
-
-		System.out.println(pageMapping.getContext());
-		System.out.println(pageMapping.getRequestUri());
-		System.out.println(pageMapping.getRequestUrl());
-		System.out.println(pageMapping.getUri());
-		System.out.println(pageMapping.getUrl());
-		System.out.println(pageMapping.getLanguage().getLanguageString());
-		System.out.println(pageMapping.getPageType());
-		System.out.println(Arrays.asList(pageMapping.getValues()));
 	}
 
 
