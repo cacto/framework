@@ -1,11 +1,11 @@
-package me.cacto.framework.controller;
+package me.cacto.framework.controller.core;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import me.cacto.framework.controller.Page;
 import me.cacto.framework.controller.annotations.Rewrite;
-import me.cacto.framework.controller.core.ControllerConfig;
 
 public class PageUtil {
 	public static PageMapping pageMapping(HttpServletRequest request, ControllerConfig config) {

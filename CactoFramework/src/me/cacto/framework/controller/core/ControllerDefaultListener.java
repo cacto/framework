@@ -7,6 +7,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletRegistration.Dynamic;
 import me.cacto.framework.common.Constants;
+import me.cacto.framework.controller.core.ControllerConfig;
 
 public abstract class ControllerDefaultListener implements ServletContextListener {
 	public abstract void initialized(ControllerConfig config);

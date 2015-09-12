@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import me.cacto.framework.common.Constants;
 import me.cacto.framework.controller.annotations.MappingParameters;
 import me.cacto.framework.controller.core.ControllerConfig;
+import me.cacto.framework.controller.core.PageMapping;
 
 public class HttpRequest extends HttpServletRequestWrapper {
 	private final PageMapping pageMapping;

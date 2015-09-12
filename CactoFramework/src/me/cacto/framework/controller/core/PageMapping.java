@@ -1,5 +1,6 @@
-package me.cacto.framework.controller;
+package me.cacto.framework.controller.core;
 
+import me.cacto.framework.controller.Page;
 import me.cacto.util.i18n.Language;
 
 public class PageMapping {
@@ -10,6 +11,7 @@ public class PageMapping {
 	String context;
 	String[] values = new String[0];
 	Language language;
+
 	Class<? extends Page> pageType;
 
 	public String getRequestUri() {

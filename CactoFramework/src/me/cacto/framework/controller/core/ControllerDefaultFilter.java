@@ -15,8 +15,9 @@ import me.cacto.framework.controller.HttpController;
 import me.cacto.framework.controller.HttpRequest;
 import me.cacto.framework.controller.HttpResponse;
 import me.cacto.framework.controller.Page;
-import me.cacto.framework.controller.PageMapping;
-import me.cacto.framework.controller.PageUtil;
+import me.cacto.framework.controller.core.ControllerConfig;
+import me.cacto.framework.controller.core.PageMapping;
+import me.cacto.framework.controller.core.PageUtil;
 import me.cacto.util.lang.ClassUtil;
 import me.cacto.util.lang.FieldUtil;
 

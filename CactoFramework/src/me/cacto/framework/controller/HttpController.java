@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import me.cacto.framework.controller.annotations.Jsp;
 import me.cacto.framework.controller.annotations.Template;
 import me.cacto.framework.controller.core.ControllerConfig;
+import me.cacto.framework.controller.core.PageMapping;
 
 public class HttpController {
 	private final Page page = null;
