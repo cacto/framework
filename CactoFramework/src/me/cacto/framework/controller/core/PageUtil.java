@@ -2,10 +2,12 @@ package me.cacto.framework.controller.core;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Locale;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import me.cacto.framework.controller.Page;
 import me.cacto.framework.controller.annotations.Rewrite;
+import me.cacto.util.i18n.Language;
 
 public class PageUtil {
 	public static PageMapping pageMapping(HttpServletRequest request, ControllerConfig config) {
@@ -82,6 +84,57 @@ public class PageUtil {
 		pageMapping.requestUrl += pageMapping.requestUri;
 
 		return pageMapping;
+	}
+
+	public static String locateUri(Class<? extends Page> pageType, ControllerConfig config, Locale locale) {
+		return locateUri(pageType, config, Language.valueOf(locale));
+	}
+
+	public static String locateUri(Class<? extends Page> pageType, ControllerConfig config, Language language) {
+		if (!config.getPages().containsValue(pageType))
+			return null;
+
+		String uri = null;
+
+		for (Rewrite rewrite : pageType.getAnnotationsByType(Rewrite.class)) {
+			if (rewrite.value().length <= 0)
+				continue;
+
+			if (language == null) {
+				uri = rewrite.value()[0];
+				break;
+			} else if (rewrite.language().getLocale() == null) {
+				uri = rewrite.value()[0];
+				break;
+			} else if (language == rewrite.language()) {
+				uri = rewrite.value()[0];
+				break;
+			}
+		}
+
+		//		if (uri == null) {
+		//			uri = pageType.getCanonicalName().replace(".", "/");
+		//
+		//			String[] packages = config.getPagePackages();
+		//			if (packages == null)
+		//				packages = new String[0];
+		//
+		//			for (String pkg : packages) {
+		//				uri = uri.replaceFirst(pkg.replace(".", "/"), "");
+		//
+		//				if (!uri.equals(pageType.getCanonicalName().replace(".", "/")))
+		//					break;
+		//			}
+		//		}
+		//
+		//		if (config.getMappingExtension() != null)
+		//			uri += "." + config.getMappingExtension();
+
+		if (!uri.startsWith("/"))
+			uri = "/" + uri;
+
+		uri = config.getServletContext().getContextPath() + uri;
+		return uri;
 	}
 
 	//	public static PageMapping pageMapping(HttpServletRequest request, ControllerConfig config) {

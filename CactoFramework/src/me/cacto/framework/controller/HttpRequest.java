@@ -15,6 +15,7 @@ import me.cacto.framework.common.Constants;
 import me.cacto.framework.controller.annotations.MappingParameters;
 import me.cacto.framework.controller.core.ControllerConfig;
 import me.cacto.framework.controller.core.PageMapping;
+import me.cacto.util.i18n.Language;
 
 public class HttpRequest extends HttpServletRequestWrapper {
 	private final PageMapping pageMapping;
@@ -103,6 +104,26 @@ public class HttpRequest extends HttpServletRequestWrapper {
 			return locale;
 
 		return Locale.getDefault();
+	}
+
+	public void setSessionLanguage(Language language) {
+		setSessionLocale(language.getLocale());
+	}
+
+	public void setSessionLocale(Locale locale) {
+		this.getSession().setAttribute(Constants.LOCALE, locale);
+		this.setLocale(locale);
+	}
+
+	public void setLocale(Locale locale) {
+		this.setAttribute(Constants.LOCALE, locale);
+	}
+
+	public void setLanguage(Language language) {
+		if (language == null || language.getLocale() == null)
+			this.removeAttribute(Constants.LOCALE);
+		else
+			this.setAttribute(Constants.LOCALE, language.getLocale());
 	}
 
 	@Override

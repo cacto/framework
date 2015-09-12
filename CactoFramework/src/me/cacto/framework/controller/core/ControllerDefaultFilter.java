@@ -15,9 +15,6 @@ import me.cacto.framework.controller.HttpController;
 import me.cacto.framework.controller.HttpRequest;
 import me.cacto.framework.controller.HttpResponse;
 import me.cacto.framework.controller.Page;
-import me.cacto.framework.controller.core.ControllerConfig;
-import me.cacto.framework.controller.core.PageMapping;
-import me.cacto.framework.controller.core.PageUtil;
 import me.cacto.util.lang.ClassUtil;
 import me.cacto.util.lang.FieldUtil;
 
@@ -83,6 +80,8 @@ public class ControllerDefaultFilter implements Filter {
 
 		HttpController controller = new HttpController();
 		HttpRequest requestWrapper = new HttpRequest(request, pageMapping);
+		requestWrapper.setLanguage(pageMapping.getLanguage());
+
 		HttpResponse responseWrapper = new HttpResponse(response, request, controller);
 
 		FieldUtil.set(HttpController.class, "request", controller, requestWrapper);

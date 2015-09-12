@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import me.cacto.framework.common.Constants;
+import me.cacto.framework.controller.core.PageUtil;
 
 public class HttpResponse extends HttpServletResponseWrapper {
 	private String location;
@@ -24,11 +25,6 @@ public class HttpResponse extends HttpServletResponseWrapper {
 		super.setLocale(locale);
 	}
 
-	public void setSessionLocale(Locale locale) {
-		this.request.getSession().setAttribute(Constants.LOCALE, locale);
-		super.setLocale(locale);
-	}
-
 	public String getLocation() {
 		return this.location;
 	}
@@ -44,7 +40,7 @@ public class HttpResponse extends HttpServletResponseWrapper {
 	}
 
 	public void sendRedirect(Class<? extends Page> pageType) {
-		//this.location = PageUtil.locateUri(pageType, this.controller.getControllerConfig(), null);// this.request.getLocale());
+		this.location = PageUtil.locateUri(pageType, this.controller.getControllerConfig(), this.request.getLocale());
 
 		if (this.location != null)
 			this.controller.abort();
